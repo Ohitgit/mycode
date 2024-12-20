@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Upload Blog{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center mb-4">Upload New Blog</h2>
+
+            <!-- Display messages (e.g., errors or success) -->
+            {% if messages %}
+                <div class="alert alert-warning">
+                    <ul class="mb-0">
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <!-- Blog Upload Form -->
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="{{ form.title.id_for_label }}">Title</label>
+                    <input type="text" name="title" id="{{ form.title.id_for_label }}" 
+                           class="form-control" value="{{ form.title.value|default:'' }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.content.id_for_label }}">Content</label>
+                    <textarea name="content" id="{{ form.content.id_for_label }}" 
+                              class="form-control" rows="5">{{ form.content.value|default:'' }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.country.id_for_label }}">Country</label>
+                    <input type="text" name="country" id="{{ form.country.id_for_label }}" 
+                           class="form-control">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Upload</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

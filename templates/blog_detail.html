@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ blog.title }}{% endblock %}
+
+{% block content %}
+    <div class="blog-detail">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title text-center">{{ blog.title }}</h1>
+            </div>
+            <div class="card-body">
+                {% if blog.image %}
+                    <div class="text-center mb-4">
+                        <img src="{{ blog.image.url }}" alt="Blog Image" class="img-fluid rounded">
+                    </div>
+                {% endif %}
+                <p class="card-text">{{ blog.content }}</p>
+                <p class="text-muted">
+                    <strong>Author:</strong> {{ blog.author.username }}
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
